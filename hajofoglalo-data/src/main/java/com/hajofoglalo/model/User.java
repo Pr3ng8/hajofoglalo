@@ -10,7 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -44,7 +46,7 @@ public class User extends BaseEntity  {
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     @JoinTable(name = "user_roles",
             joinColumns =
                     { @JoinColumn(name = "user_id", referencedColumnName = "id",  nullable = false) },
@@ -52,21 +54,26 @@ public class User extends BaseEntity  {
                     { @JoinColumn(name = "role_id", referencedColumnName = "id",  nullable = false) })
     private Set<Role> role = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Reservation> reservations = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER ,  mappedBy = "user")
     private Set<Post> posts = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER , mappedBy = "user")
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL,  fetch = FetchType.EAGER , mappedBy = "user")
     private UserStatus userStatus;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL,  fetch = FetchType.EAGER ,  mappedBy = "user")
     private Boat boat;
 
-
-    private void setUserStatus() { this.userStatus.setStatus(true); }
+    public List<String> getRoles() {
+        List<String> tmp = new ArrayList<>();
+        for (Role role : this.role) {
+                tmp.add(role.toString());
+        }
+        return tmp;
+    }
 }

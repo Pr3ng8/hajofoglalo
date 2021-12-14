@@ -2,7 +2,6 @@ package com.hajofoglalo.bootstrap;
 
 import com.hajofoglalo.model.User;
 import com.hajofoglalo.repositories.UserRepository;
-import com.hajofoglalo.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +15,6 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User();
-        user.setFirstName("Bence");
-        user.setLastName("Varga");
-        User savedUSer = userRepository.save(user);
+
     }
 }
