@@ -1,0 +1,19 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          mb:
+            client-name: mb
+            client-id: ui
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: http:localhost:8084/ui/login/oauth2/code/
+            scope: openId
+            client-authentication-method: basic
+        provider:
+          mb:
+          token-uri: http://localhost:8181/oauth/token
+          authorization-uri: http:localhost:8181/oauth/authorize
+          user-info-uri: http:localhost:8181/oauth/userinfo
+          jwk-set-uri:  http:localhost:8181/oauth/keys
