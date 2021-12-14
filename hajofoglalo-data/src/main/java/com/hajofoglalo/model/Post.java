@@ -31,6 +31,7 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")

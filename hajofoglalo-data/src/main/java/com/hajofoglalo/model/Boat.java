@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "boats")
-@SQLDelete(sql = "UPDATE table_product SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE boats SET deleted = false WHERE id=?")
 @Where(clause = "deleted=false")
 public class Boat extends BaseEntity {
 
@@ -27,6 +27,7 @@ public class Boat extends BaseEntity {
     @Column(name = "maximum_capacity")
     private int maximum_capacity;
 
+    @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "boat")

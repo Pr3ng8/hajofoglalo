@@ -15,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "comments")
-@SQLDelete(sql = "UPDATE table_product SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE comments SET deleted = false WHERE id=?")
 @Where(clause = "deleted=false")
 public class Comment extends BaseEntity{
     @Column(name = "body")
@@ -24,6 +24,7 @@ public class Comment extends BaseEntity{
     @Column(name = "deletedBy_userId")
     private int deletedBy_userId;
 
+    @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
     @ManyToOne

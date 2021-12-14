@@ -19,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-@SQLDelete(sql = "UPDATE table_product SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE users SET deleted = false WHERE id=?")
 @Where(clause = "deleted=false")
 public class User extends BaseEntity  {
     @Column(name = "first_name")
@@ -41,6 +41,7 @@ public class User extends BaseEntity  {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDate bithdate;
 
+    @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
     @ManyToMany(cascade = CascadeType.ALL)

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "reservations")
-@SQLDelete(sql = "UPDATE table_product SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE reservations SET deleted = false WHERE id=?")
 @Where(clause = "deleted=false")
 public class Reservation extends BaseEntity {
 
@@ -28,6 +28,7 @@ public class Reservation extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDate start_of_rent;
 
+    @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
     @Column(name = "end_of_rent")
