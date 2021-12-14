@@ -1,0 +1,22 @@
+version: "3.6"
+services:
+  #MySQL Service
+  MySql:
+    container_name: MySql
+    image: mysql:5.7.22
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: 123456
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./images/mysql/conf/my.cnf:/etc/mysql/my.cnf
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
