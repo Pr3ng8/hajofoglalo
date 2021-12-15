@@ -5,6 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<div th:utext="${post.body}"></div>
+
+<div th:if="${post != null}">
+    <div  th:utext="${post.getBody()}"></div>
+</div>
+<div th:if="${post == null}">
+    <div>Nincs ilyen poszt!</div>
+</div>
 </body>
 </html>

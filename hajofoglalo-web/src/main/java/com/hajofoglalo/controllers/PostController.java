@@ -9,13 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/posts")
 @Controller
@@ -32,47 +30,63 @@ public class PostController {
 
     @GetMapping
     public String getPosts(Model model) {
+        if (authentication.getCredentials().toString() == "a")
+        {
+
+        }
         List<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
         return "posts/posts";
     }
 
     @GetMapping("/{postId}")
-    public ModelAndView getPostById(@PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("posts/posts");
-        mav.addObject(postRepository.findById(postId));
+    public ModelAndView getPostById(@PathVariable Long postId) {
+        ModelAndView mav = new ModelAndView("posts/post");
+        Optional<Post> temp = postRepository.findById(postId);
+
+        if ( temp.isEmpty() )
+        {
+            mav.addObject("post", null);
+        }else
+        {
+            Post post = temp.get();
+            mav.addObject("post", post);
+        }
+
         return mav;
     }
 
     @GetMapping("/create")
     public String createPost() {
-        return "posts/create";
+        return "posts/form";
     }
 
-    @PostMapping ("/save")
-    public ModelAndView savePost(@Validated Post post, BindingResult result) {
-        ModelAndView mav = new ModelAndView("posts/posts");
+    @PostMapping("/save")
+    public ModelAndView savePost(@Validated Post post) {
+        ModelAndView mav = new ModelAndView("posts/form");
+        Post save = post;
+        authentication.getName();
         mav.addObject(postRepository.save(post));
         return mav;
     }
 
     @PostMapping ("/delete/{postId}")
-    public ModelAndView deletePost(@PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("posts/posts");
+    public ModelAndView deletePost(@PathVariable Long postId) {
+        ModelAndView mav = new ModelAndView("posts/post");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }
 
     @GetMapping("/edit/{postId}")
-    public ModelAndView editPost(@PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("posts/posts");
+    public ModelAndView editPost(@PathVariable Long postId) {
+        ModelAndView mav = new ModelAndView("posts/form");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }
 
     @PostMapping("/update/{postId}")
-    public ModelAndView updatePost(@Validated Post post, BindingResult result, @PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("posts/posts");
+    public ModelAndView updatePost(@Validated Post post, BindingResult result, @PathVariable Long postId) {
+        ModelAndView mav = new ModelAndView("posts/form");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }

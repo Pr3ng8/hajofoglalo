@@ -32,5 +32,5 @@ public class Post extends BaseEntity {
     private boolean deleted = Boolean.FALSE;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private Set<Comment> reservations = new HashSet<>();
+    private Set<Comment> comments = new HashSet<>();
 }

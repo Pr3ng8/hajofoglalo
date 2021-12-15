@@ -28,12 +28,12 @@ public class Reservation extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDate start_of_rent;
 
-    @Column(name = "deleted")
-    private boolean deleted = Boolean.FALSE;
-
     @Column(name = "end_of_rent")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDate end_of_rent;
+
+    @Column(name = "deleted")
+    private boolean deleted = Boolean.FALSE;
 
     @ManyToOne
     @JoinColumn(name = "boat_id")
