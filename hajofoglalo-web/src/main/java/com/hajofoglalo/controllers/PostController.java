@@ -34,12 +34,12 @@ public class PostController {
     public String getPosts(Model model) {
         List<Post> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
-        return "posts";
+        return "posts/posts";
     }
 
     @GetMapping("/{postId}")
     public ModelAndView getPostById(@PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("post");
+        ModelAndView mav = new ModelAndView("posts/posts");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }
@@ -51,28 +51,28 @@ public class PostController {
 
     @PostMapping ("/save")
     public ModelAndView savePost(@Validated Post post, BindingResult result) {
-        ModelAndView mav = new ModelAndView("posts");
+        ModelAndView mav = new ModelAndView("posts/posts");
         mav.addObject(postRepository.save(post));
         return mav;
     }
 
     @PostMapping ("/delete/{postId}")
     public ModelAndView deletePost(@PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("posts");
+        ModelAndView mav = new ModelAndView("posts/posts");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }
 
     @GetMapping("/edit/{postId}")
     public ModelAndView editPost(@PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("post");
+        ModelAndView mav = new ModelAndView("posts/posts");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }
 
     @PostMapping("/update/{postId}")
     public ModelAndView updatePost(@Validated Post post, BindingResult result, @PathVariable Integer postId) {
-        ModelAndView mav = new ModelAndView("post");
+        ModelAndView mav = new ModelAndView("posts/posts");
         mav.addObject(postRepository.findById(postId));
         return mav;
     }

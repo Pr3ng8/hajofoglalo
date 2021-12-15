@@ -12,13 +12,12 @@ public class LoginController  {
 
     @GetMapping("/login")
     public String getLoginPage() {
-        log.warn("/logind");
+        log.warn("/login");
         return "login";
     }
 
     @PostMapping("/authenticate")
     public String auth(Model model) {
-        log.warn(model.toString() +" sdfsdfsdf");
         return "login";
     }
 }
