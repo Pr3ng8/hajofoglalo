@@ -12,7 +12,7 @@
     </tr>
     <tr th:each="post : ${posts}">
         <td th:text="${post.body}">Onions</td>
-        <td th:text="${post.user_id}">2.41</td>
+        <td th:text="${post.user.getFirstName()}">2.41</td>
     </tr>
 </table>
 </body>

@@ -24,9 +24,6 @@ public class Post extends BaseEntity {
     @Column(name = "body")
     private String body;
 
-    @Column(name = "deletedBy_userId")
-    private int deletedBy_userId;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
