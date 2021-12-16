@@ -57,10 +57,10 @@ public class User extends BaseEntity  {
     @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Reservation> reservations = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER ,  mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY ,  mappedBy = "user")
     private Set<Post> posts = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.EAGER , mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,  fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Comment> comments = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL,  fetch = FetchType.EAGER , mappedBy = "user")
@@ -72,7 +72,7 @@ public class User extends BaseEntity  {
     public List<String> getRoles() {
         List<String> tmp = new ArrayList<>();
         for (Role role : this.role) {
-                tmp.add(role.toString());
+                tmp.add(role.getName());
         }
         return tmp;
     }

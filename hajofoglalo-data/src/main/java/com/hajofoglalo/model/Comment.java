@@ -21,9 +21,6 @@ public class Comment extends BaseEntity{
     @Column(name = "body")
     private String body;
 
-    @Column(name = "deletedBy_userId")
-    private int deletedBy_userId;
-
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 

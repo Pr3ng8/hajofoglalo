@@ -16,7 +16,7 @@ public class LoginController  {
         return "login";
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/forgottenpassword")
     public String auth(Model model) {
         return "login";
     }

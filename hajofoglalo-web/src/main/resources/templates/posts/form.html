@@ -9,17 +9,12 @@
 
 <h1>FORM POST</h1>
 
-<form th:action="@{/posts/save}" method="post">
-
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-
+<form th:action="@{/posts/update/{postId}(postId = ${post.getId()})}" method="post">
+    <input type="hidden" name="id" th:value="${post.getId()}">
+    <input type="hidden" name="deleted" th:value="${post.deleted}">
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" name="body" rows="3"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" th:text="${post.getBody()}" name="body" rows="3"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

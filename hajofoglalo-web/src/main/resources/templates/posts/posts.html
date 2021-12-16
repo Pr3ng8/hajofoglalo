@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<table>
+<table th:if="${posts} != null">
     <tr>
         <th>Body</th>
         <th>User_id</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="post : ${posts}">
         <td th:text="${post.body}">Onions</td>
-        <td th:text="${post.user.getFirstName()}">2.41</td>
+        <td th:text="${post.user.getFirstName()}"></td>
+        <td>
+            <form method="GET" th:action="@{/posts/edit/{postId}(postId = ${post.getId()})}">
+                <button type="submit" class="btn btn-warning" alt="Szerkeszt">Szerkeszt</button>
+            </form>
+            <a type="submit" class="btn btn-warning" th:href="@{/posts/edit/{postId}(postId = ${post.getId()})}">Szerkeszt</a>
+            <form method="POST" th:action="@{/posts/delete/{postId}(postId = ${post.getId()})}">
+                <button type="submit" class="btn btn-danger" alt="Törlés">Törlés</button>
+            </form>
+        </td>
     </tr>
 </table>
 </body>

@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "posts")
-@SQLDelete(sql = "UPDATE table_product SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE posts SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class Post extends BaseEntity {
 
@@ -31,6 +31,6 @@ public class Post extends BaseEntity {
     @Column(name = "deleted")
     private boolean deleted = Boolean.FALSE;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(mappedBy = "post", orphanRemoval=true,cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 }
